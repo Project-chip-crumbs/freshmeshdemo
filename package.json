@@ -1,0 +1,40 @@
+{
+  "name": "freshmeshdemo",
+  "version": "1.0.0",
+  "description": "Demo for NTC mesh networking concepts",
+  "main": "app.js",
+  "dependencies": {
+    "express": "^4.13.14",
+    "node-osc": "^1.2.0 ",
+    "open": "^0.0.5",
+    "i2c": "^0.2.1",
+    "lcd": "1.1.1",
+    "chip-gpio": "1.0.1",
+    "player": "0.6.1",
+    "node-record-lpcm16": "0.1.4",
+    "request": "2.69.0"
+
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NextThingCo/freshmeshdemo.git"
+  },
+  "keywords": [
+    "nyboer",
+    "NextThingCo",
+    "mesh networking",
+    "CHIP",
+    "$9 Computer",
+    "C.H.I.P"
+  ],
+  "author": "Peter Nyboer",
+  "license": "GPL3",
+  "bugs": {
+    "url": "https://github.com/NextThingCo/freshmeshdemo/issues"
+  },
+  "homepage": "https://github.com/NextThingCo/freshmeshdemo"
+}
