@@ -1,0 +1,22 @@
+Mesh demo example:
+Two devices: each has 4 buttons
+When not in mesh, each is DO-RE-MI-FA
+When both in mesh, 1 is DO-RE-MI-FA, other is SO-LA-TI-DO
+Etc.
+Each renders its own button presses: music is spatialized.
+Could have one subscribe as "renderer" which only listens to button presses and plays entire tune.
+
+How to do GPIO?
+How to address a GPIO on mesh or local, how to discover GPIOs (should be announced?)
+Maybe like OSC, listeners would output:
+/member/gpio/0/ <pin state>
+
+Try to prototype the reordering problem. If 5 enter, they show 1,2,3,4,5. A couple leave, they get 1,2, others are renumbered 1,2,3
+need to figure out how to "store" the array based on count of peers.
+
+Find package that can render text-to-image. Display is a small graphic display that shows frame buffer.
+
+Interesting protocols:
+ZeroMQ https://en.wikipedia.org/wiki/%C3%98MQ
+netns http://blog.scottlowe.org/2013/09/04/introducing-linux-network-namespaces/
+
