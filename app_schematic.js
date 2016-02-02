@@ -29,11 +29,13 @@ mesh.on('authorize',function() {
 
 ////////////////----EXIT OR DISCONNECT MESH----/////////////////
 // Add a disconnect listener
-mesh.on('disconnect',function() {
+mesh.on('change',delta_tolerance,function() {
 	console.log('The client has disconnected from mesh!');
 	//on disconnect, it might be good to create some sort of buffer, in case reconnect happens soon.
 });
-
+mesh.on('newguy',peerID,capabilities,function(){
+  getpeerGPIO();
+})
 
 ////////////////----RECEIVING----/////////////////
 // Add a message listener
@@ -91,8 +93,6 @@ mesh.on.peer('rgb',rgb,peerIDs, function(){
 
 ////////////////----I2C display----/////////////////
 //https://www.npmjs.com/package/i2c
-
-
 var i2c = require('i2c');
 var address = 0x18;
 var display = new i2c(address, {device: '/dev/i2c-1'}); // point to your i2c address, debug provides REPL interface 
@@ -217,13 +217,15 @@ function record(v){
 
 //you could do some things like this
 function getmeshinfo(){
-  var count = freshmesh.count(); //returns int
-  var peers = freshmesh.peers(); //returns array of other members
-  var myID = freshmesh.id(); //id of client
-  var myName = freshmesh.friendlyname(); //theoretical 'friendly' name of this client, not as ugly as ID
-  var isAccessPoint = freshmesh.isWAP(); //boolean to determine if client is acting as WAP
-  var isInternet = freshmesh.isLAN(); //has access to Internet or is connected to a LAN somehow
-  var signal = freshmesh.strength(); //0-1 value determining connection strength to WAP
+  var count = mesh.count(); //returns int
+  var peers = mesh.peers(); //returns array of other members
+  var myID = mesh.id(); //id of client
+  var myName = mesh.friendlyname(); //theoretical 'friendly' name of this client, not as ugly as ID
+  var isAccessPoint = mesh.isAP(); //boolean to determine if client is acting as WAP
+  var isInternet = mesh.isLAN(); //has access to Internet or is connected to a LAN somehow
+  var signal = mesh.strength(); //0-1 value determining connection strength to WAP
+  var permissions = mesh.access();
+  var joined = mesh.groupjoined();
   console.log(count+" , "+peers+" , "+myID+" , "+myName+" , "+isAccessPoint+" , "+isInternet+" , "+signal);
 }
 
@@ -238,3 +240,10 @@ function exit() {
 }
 process.on('SIGINT', exit);
 //<<<
+
+//JSON to describe what the app (and/or device) is willing to provide or can do
+var capabilities{
+  "buttons": 4,
+
+
+}
