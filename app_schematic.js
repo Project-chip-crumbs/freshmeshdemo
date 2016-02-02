@@ -244,6 +244,6 @@ process.on('SIGINT', exit);
 //JSON to describe what the app (and/or device) is willing to provide or can do
 var capabilities{
   "buttons": 4,
-
-
+  "lcd": [16,2],
+  "speaker": "small",
 }
