@@ -174,14 +174,22 @@ function rgb_led(r,g,b){
 //sound: https://github.com/guo-yu/player
 //https://www.npmjs.com/package/player
 var Player = require('player');
-
-function playsound(file_or_url){
-  // create player instance. url could be something like http://10.0.0.129/sound.mp3
-  var player = new Player(file_or_url);
-  // play now and callback when playend
-  player.play(function(err, player){
-    console.log('playend!');
-  });
+var songs = ['snd/perc_highndirty_putney.mp3','snd/bass_laze_voyager.mp3','snd/perc_springverb_putney.mp3']
+function playsound (){
+  var pl = new Player(songs[2])
+    .on('playing', function(song) {
+      console.log('I\'m playing... ');
+      console.log(song);
+    })
+    .on('playend', function(song) {
+      console.log('Play done, Switching to next one ...');
+    })
+    .on('error', function(err) {
+      console.log('Opps...!')
+      console.log(err);
+    })
+    
+  pl.play()
 }
 
 //--RECORD using js stream and pass onto voice rec api 
@@ -190,7 +198,7 @@ function playsound(file_or_url){
 var rec       = require('node-record-lpcm16'),
     request   = require('request');
 
-var witToken = process.env.WIT_TOKEN; // get one from wit.ai!
+var witToken = 3M4SWT7XYUJEDD6SHJLI4NBM4XPM5FPO; // get one from wit.ai!
 
 function record(v){
   if(v>0){
@@ -198,7 +206,7 @@ function record(v){
       console.log(body);
     };
 
-    //could try https://www.houndify.com or alexa
+    //could try 
     rec.start().pipe(request.post({
       'url'     : 'https://api.wit.ai/speech?client=chromium&lang=en-us&output=json',
       'headers' : {
